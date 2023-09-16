@@ -1,0 +1,67 @@
+# swagger.yml
+
+openapi: 3.0.0
+info:
+  title: "Locki Flask REST API"
+  description: "Locki API to connect user and scripts"
+  version: "0.1.0"
+
+servers:
+  - url: "/api"
+
+components:
+  schemas:
+    Wallet:
+      type: "object"
+      required:
+        - bech32
+      properties:
+        bech32:
+          type: "string"
+        herotag:
+          type: "string"
+  parameters:
+    bech32:
+      name: "bech32"
+      description: "erd adress of the user/wallet"
+      in: path
+      required: True
+      schema:
+        type: "string"
+paths:
+  /user:
+    get:
+      operationId: "user.read_all"
+      tags:
+        - Users
+      summary: "Read the list of user"
+      responses:
+        "200":
+          description: "Successfully read user list"
+    post:
+      operationId: "user.create"
+      tags:
+        - Users
+      summary: "Create a wallet for a person"
+      requestBody:
+        description: "wallet body"
+        required: True
+        content:
+          application/json:
+            schema:
+              x-body-name: "wallet"
+              $ref: "#/components/schemas/Wallet"
+      responses:
+        "201":
+          description: "Successfully created user wallet"          
+  /user/{bech32}:
+    get:
+      operationId: "user.read_one"
+      tags:
+        - Users
+      summary: "Read one user"
+      parameters:
+        - $ref: "#/components/parameters/bech32"
+      responses:  
+        "200":
+          "description": "Successfully read user"

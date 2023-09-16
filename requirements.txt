@@ -1,0 +1,8 @@
+ipykernel
+Flask==2.2.2
+connexion[swagger-ui]==2.14.1
+flask-marshmallow[sqlalchemy]==0.14.0
+uuid==1.30.0
+multiversx-sdk-core==0.5.*
+multiversx-sdk-wallet==0.7.*
+multiversx-sdk-network-providers==0.11.*
